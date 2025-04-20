@@ -27,3 +27,37 @@ It aims to simplify the data access layer by replacing cumbersome late-bound att
     * `CrmMapAttribute.cs` (Contains `CrmMapAttribute` class and `CrmMapSourcePart` enum)
     * `XrmMapper.cs` (Contains the static `XrmMapper` class and its logic)
 2.  **Adjust Namespace:** Ensure the namespace used in the files (e.g., `XrmMapping`) matches your project structure or update the `using` statements where you call the mapper.
+
+## Project Structure
+
+The solution is organized as follows:
+
+```plaintext
+.
+├── EntityPocoBridge/         # Main class library project (.NET Standard 2.0)
+│   ├── CrmMapAttribute.cs    # Contains CrmMapAttribute and CrmMapSourcePart enum
+│   ├── XrmMapper.cs          # Contains the static XrmMapper class and logic
+│   └── EntityPocoBridge.csproj # Project file with package metadata
+├── UnitTests/                # Unit test project (using MSTest/NUnit/xUnit)
+│   ├── XrmMapperTests.cs     # Contains unit tests for the mapper logic
+│   └── UnitTests.csproj      # Test project file
+├── .gitignore                # Git ignore file for C#/.NET development
+├── EntityPocoBridge.sln      # Visual Studio Solution file
+├── LICENSE                   # MIT License file
+└── README.md                 # This documentation file
+
+```markdown
+## Contributing & Feedback
+
+This project is open-source under the MIT License, and your input is highly valued!
+
+Whether you're using this mapper, reviewing the code, or just have ideas, feedback is crucial for improvement and helps guide future development towards a potential NuGet package release.
+
+Please feel free to:
+
+* **Report Bugs:** If you encounter any issues or unexpected behavior, please check the existing issues and open a new one if necessary: [[Link to Your GitHub Issues Tab]](https://github.com/rakjashn/EntityPocoBridge/issues)
+* **Suggest Enhancements:** Have ideas for improvements or features (like handling `OptionSetValueCollection`, adding more configuration)? Please open an issue to discuss them.
+* **Provide General Feedback:** Does this approach solve a problem for you? Is the usage clear? All feedback is welcome via GitHub Issues.
+* **Contribute Code:** Pull Requests (PRs) addressing bugs or approved enhancements are welcome. Please consider opening an issue to discuss significant changes beforehand.
+
+Let's work together to make working with Dataverse/CRM data in .NET even easier!
