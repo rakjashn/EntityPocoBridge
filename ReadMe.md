@@ -23,7 +23,7 @@ It aims to simplify the data access layer by replacing cumbersome late-bound att
 
 ## Setup
 
-1.  **Add Code Files:** Copy the following C# code into your project. You can place them in separate files (recommended) or combine them into one, adjusting namespaces as needed.
+1.  **Clone the project:** Clone or Download the following project into your machine. You can place them in separate files (recommended) or combine them into one, adjusting namespaces as needed.
     * `CrmMapAttribute.cs` (Contains `CrmMapAttribute` class and `CrmMapSourcePart` enum)
     * `XrmMapper.cs` (Contains the static `XrmMapper` class and its logic)
 2.  **Adjust Namespace:** Ensure the namespace used in the files (e.g., `XrmMapping`) matches your project structure or update the `using` statements where you call the mapper.
