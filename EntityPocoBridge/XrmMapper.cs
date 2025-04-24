@@ -14,8 +14,10 @@ using System.Reflection;
 
 namespace EntityPocoBridge
 {
-    public static class XrmMapper
+    public static partial class XrmMapper
     {
+        #region Reading / Deserialization Logic (From Entity -> POCO)
+
         // Cache for reflected property mapping info (Type -> List<MappingInstructions>)
         private static readonly ConcurrentDictionary<Type, List<MappingInfo>> _mappingCache =
             new ConcurrentDictionary<Type, List<MappingInfo>>();
@@ -343,5 +345,7 @@ namespace EntityPocoBridge
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
+
+        #endregion
     }
 }
