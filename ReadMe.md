@@ -8,12 +8,18 @@ It aims to simplify the data access layer by replacing cumbersome late-bound att
 
 ## Features
 
-* **Attribute-Based Mapping:** Define mapping rules declaratively using the `[CrmMap]` attribute on your POCO properties.
-* **Handles Common CRM Types:** Supports mapping for `EntityReference` (Lookups), `OptionSetValue` (Option Sets, Statuses), `Money`, `DateTime`, Booleans, Numbers, Strings, etc.
-* **Flexible Extraction:** Extract specific parts of complex types (e.g., `Id` or `Name` from `EntityReference`, `Value` or `FormattedValue` from `OptionSetValue`).
-* **Aliased Value Support:** Maps data retrieved from linked entities using the `alias.attribute` convention.
-* **Custom DateTime Formatting:** Specify exact string formats when mapping CRM `DateTime` values to POCO `string` properties.
-* **Performance Optimized:** Uses a thread-safe cache (`ConcurrentDictionary`) to store reflection results, minimizing performance impact after the first mapping of a specific POCO type.
+* **Attribute-Based Mapping:** Define mapping rules declaratively using the `[CrmMap]` attribute on your POCO properties for both reading and writing.
+* **Read Functionality (`Entity` -> POCO):**
+    * Handles Common CRM Types: `EntityReference`, `OptionSetValue`, `Money`, `DateTime`, Booleans, Numbers, Strings, `BooleanManagedProperty`, etc.
+    * Flexible Extraction: Extract specific parts (`Id`, `Name`, `Value`, `FormattedValue`).
+    * Aliased Value Support: Maps data retrieved from linked entities.
+    * Custom DateTime Formatting: Specify string formats when mapping `DateTime` to `string`.
+* **Write Functionality (POCO -> `Entity`):**
+    * Map POCOs to `Entity` objects ready for `IOrganizationService.Create()` or `Update()`.
+    * Handles conversion of .NET types to SDK types (`Guid` -> `EntityReference`, `int`/`Enum` -> `OptionSetValue`, `decimal` -> `Money`, `bool` -> `bool`).
+    * Requires `TargetEntityLogicalName` attribute property for mapping `Guid` to lookups.
+    * Optionally map `null` POCO properties to clear fields during updates.
+* **Performance Optimized:** Uses thread-safe caches (`ConcurrentDictionary`) for reflection results, minimizing performance impact after the first mapping of a specific POCO type (separate caches for read and write).
 * **Simplified Code:** Leads to cleaner, more readable, and more testable application code by working with POCOs instead of `Entity` objects directly.
 
 ## Requirements
@@ -38,8 +44,9 @@ The solution is organized as follows:
 │   ├── CrmMapAttribute.cs    # Contains CrmMapAttribute and CrmMapSourcePart enum
 │   ├── XrmMapper.cs          # Contains the static XrmMapper class and logic
 │   └── EntityPocoBridge.csproj # Project file with package metadata
-├── UnitTests/                # Unit test project (using MSTest/NUnit/xUnit)
-│   ├── XrmMapperTests.cs     # Contains unit tests for the mapper logic
+├── UnitTests/                # Unit test project (using NUnit)
+│   ├── XrmMapperReadTests.cs # Contains unit tests for read logic (Entity->POCO)
+│   ├── XrmMapperWriteTests.cs# Contains unit tests for write logic (POCO->Entity)
 │   └── UnitTests.csproj      # Test project file
 ├── .gitignore                # Git ignore file for C#/.NET development
 ├── EntityPocoBridge.sln      # Visual Studio Solution file
