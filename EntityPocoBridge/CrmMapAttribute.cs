@@ -30,6 +30,13 @@ namespace EntityPocoBridge
         /// Ignored otherwise.
         /// </summary>
         public string DateTimeFormat { get; set; } // Make it settable property
+
+        /// <summary>
+        /// Optional: Specifies the target entity logical name when mapping a Guid POCO property
+        /// to a CRM EntityReference (lookup) field (writing only). Required for writing lookups via Guid.
+        /// </summary>
+        public string TargetEntityLogicalName { get; set; }
+
         /// <summary>
         /// Maps a POCO property using default source part extraction based on target type.
         /// </summary>
